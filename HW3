@@ -1,0 +1,84 @@
+print("Welcome to hangman!")
+check = False
+for i in range(3):
+    name = str(input("Enter Name:"))
+    if len(name) > 0:
+        check = True
+        break
+    elif len(name) == 0:
+     print("Incorrect Entry")
+if not check:
+ print("Please try again later")
+
+import random
+import requests
+
+word_site = "https://www.mit.edu/~ecprice/wordlist.10000"
+
+response = requests.get(word_site)
+WORDS = response.content.splitlines()
+
+check = True
+while True:
+    word = str(random.choice(WORDS))
+    word = word[2:]
+    word = word[:-1]
+    word = word.upper()
+    word1 = [w for w in str(word)]
+    dashes = ["_"] * len(word)
+    guessed_letters = []
+    guessed = False
+    tries = 10
+    
+    while not guessed and tries > 0:
+        print(dashes)
+        guess = input("type a letter: ").upper()
+        if guess in guessed_letters:
+            print("you already tried", guess, "!")
+        elif len(guess) != 1:
+            print("Invalid Input!")
+        elif guess not in word1:
+            print(guess, "isn't in the word :(")
+            guessed_letters.append(guess)
+            tries -= 1
+            if tries == 0:
+                print("Game over!", name, "the word was: ", word)
+                break
+        else:
+            print("You found a letter!")
+            guessed_letters.append(guess)
+            occurances = []
+            found = True
+            index = -1
+            for f in range(len(word1)):
+                try:
+                    index=word1.index(guess, index + 1)
+                    occurances.append(index)
+                except ValueError:
+                    found = False
+            o = -1
+            for r in range(len(occurances)):
+                dashes[occurances[o + 1]]=guess
+                o +=1 
+                if "_" not in dashes:
+                    guessed = True
+                    print(dashes)
+                    print("Congats! You win!")
+
+               
+    quit = str(input("Do you want to play again? (Y/N)"))
+    if quit == "N":
+        print("Good Bye!!")
+        check = False
+        break
+    check2 = True
+    while True:
+        if not quit == "Y":
+            quit = str(input("Please enter Y or N"))
+            if quit == "N":
+                print("Good Bye!!")
+                check2 = False
+                break
+        else:
+            check2 = False
+            break
