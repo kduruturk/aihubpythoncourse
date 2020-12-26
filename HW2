@@ -1,0 +1,19 @@
+print("user identification")
+
+info = ["First name", "Last Name", "Age", "Date of Birth"]
+user = []
+k=0
+for i in range(len(info)):
+        userinfo = input(info[k])
+        k+=1
+        user.append(userinfo)
+           
+z = 0     
+for i in range(len(info)):
+    print(info[z] + " " + user[z])
+    z+=1
+if int(user[2])<18:
+    print("You can't go because it's too dangerous")
+else:
+    print("you can go out to the street")
+
