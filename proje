@@ -1,0 +1,60 @@
+check = False
+for i in range(3):
+    name = str(input("Enter Name:"))
+    sname = str(input("Enter Surname:"))
+    if len(name) > 0:
+        check = True
+        break
+    elif len(name) == 0:
+     print("Incorrect Entry")
+    elif len(sname) == 0:
+     print("Incorrect Entry")
+if not check:
+ print("Please try again later")
+
+print("Enter the courses to take (min 3):")
+courses = []
+for i in range(1, 6):
+    print("Course", i, ":")
+    item = str(input())
+    if len(item) > 0:
+        courses.append(item)
+if len(courses) < 3:
+    print("you failed in class")
+else:
+    print(courses, " are recorded")
+    
+    check = True
+while True:
+    gradecourse = str(input("Choose the course to enter grades:"))
+    if gradecourse in courses:
+        break
+    else:
+        print("Please choose a course from the list")
+exams = ["midterm", "final", "project"]
+grades = []
+for j in range(len(exams)):
+    check = False
+    while True: 
+        print("Enter", exams[j], ":")
+        item2 = int(input())
+        if 0 <= item2 <= 100:
+            grades.append(item2)
+            check = True
+            break
+        else: print("Please enter a number between 0 and 100")
+dictionary = {exams[i]: grades[i] for i in range(len(exams))}
+print(dictionary)
+def gradecalc(midterm, final, project):
+    print("Dear ", name, " ", sname, ",")
+    grade = (midterm*0.3)+(final*0.5)+(project*0.2)
+    if grade >= 90: grade = "AA"
+    elif 70 <= grade < 90: grade = "BB"
+    elif 50 <= grade < 70: grade = "CC"
+    elif 30 <= grade < 50: grade = "DD"
+    elif grade < 30: 
+        grade = "FF"
+        print("You got", grade, "You failed!")
+    print("You got", grade, "Congats!")
+        
+gradecalc(*grades)
